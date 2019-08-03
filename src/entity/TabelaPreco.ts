@@ -3,6 +3,9 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, PrimaryColumn
 @Entity()
 export class TabelaPreco {
 
+    @PrimaryGeneratedColumn()
+    id: number;
+
     @Column()
     tipoProcesso: string;
 
@@ -36,6 +39,5 @@ export class TabelaPreco {
         scale: 4
     })
     valorFilme: number;
-    static codTabela: any;
-    
+
 }
