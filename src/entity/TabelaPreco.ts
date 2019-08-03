@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, PrimaryColumn, OneToMany } from "typeorm";
+import { Legenda } from "./Legenda";
 
 @Entity()
 export class TabelaPreco {
@@ -14,10 +15,10 @@ export class TabelaPreco {
 
     @Column()
     descItem: string;
-    
-    @PrimaryColumn()
+
+    @Column()
     codTabela: string;
-    
+
     @Column({
         name: "valorTotal",
         type: "decimal",
@@ -26,9 +27,9 @@ export class TabelaPreco {
     })
     valorTotal: number;
 
-    @CreateDateColumn({type:'date'})
+    @CreateDateColumn({ type: 'date' })
     dataVigencia: Date;
-    
+
     @Column()
     unidMedida: string;
 
@@ -40,4 +41,6 @@ export class TabelaPreco {
     })
     valorFilme: number;
 
+    @OneToMany(type => Legenda, legenda => legenda.tabelaPreco)
+    legendas: Legenda[];
 }

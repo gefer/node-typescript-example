@@ -7,37 +7,31 @@ export class DemonstracaoPagamento {
 
     @PrimaryGeneratedColumn()
     id: number;
-    
-    @ManyToOne(type => Prestador, Prestador => Prestador.codPrestador)
-    @JoinColumn({ name: "codPrestador" })
-    public prestador: Prestador;
 
     @Column()
     executante: string;
 
-    @ManyToOne(type => TabelaPreco, TabelaPreco => TabelaPreco.codItem)
-    @JoinColumn({ name: "codItem" })
-    public tabelaPreco: TabelaPreco;
-
-    
-    @CreateDateColumn({type:'date'})
+    @CreateDateColumn({ type: 'date' })
     dataAtendimento: Date;
 
     @Column()
     quantidade: number;
 
     @Column({
-        name: "valorPago",
+        name: "valor_pago",
         type: "decimal",
         precision: 18,
         scale: 4
     })
     valorPago: number;
-    
+
     @Column()
     tipoGuia: string;
 
     @Column()
     tipoPlano: string;
-    
+
+    @ManyToOne(type => Prestador, prestador => prestador.demonstracoes)
+    public prestador: Prestador;
+
 }

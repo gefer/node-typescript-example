@@ -8,12 +8,10 @@ export class Legenda {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => TabelaPreco, TabelaPreco => TabelaPreco.codTabela)
-    @JoinColumn({ name: "codTabela" })
+    @ManyToOne(type => TabelaPreco, tabpreco => tabpreco.legendas)
     public tabelaPreco: TabelaPreco;
 
-    @ManyToOne(type => Prestador, Prestador => Prestador.codPrestador)
-    @JoinColumn({ name: "codPrestador" })
+    @ManyToOne(type => Prestador, prestador => prestador.legendas)
     public prestador: Prestador;
 
     @Column()
@@ -23,7 +21,7 @@ export class Legenda {
     tipoServico: string;
 
     @Column({
-        name: "percentualTaxa",
+        name: "percentual_taxa",
         type: "decimal",
         precision: 18,
         scale: 4
