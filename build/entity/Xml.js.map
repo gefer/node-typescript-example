@@ -1,1 +1,0 @@
-{"version":3,"file":"Xml.js","sourceRoot":"","sources":["../../src/entity/Xml.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,mCAAyH;AAGzH;IAAA;IASA,CAAC;IAPG;QADC,gCAAsB,EAAE;;mCACd;IAGX;QADC,gBAAM,EAAE;;6CACY;IAGrB;QADC,0BAAgB,CAAC,EAAC,IAAI,EAAC,MAAM,EAAC,CAAC;kCAClB,IAAI;6CAAC;IARV,GAAG;QADf,gBAAM,EAAE;OACI,GAAG,CASf;IAAD,UAAC;CAAA,AATD,IASC;AATY,kBAAG"}
