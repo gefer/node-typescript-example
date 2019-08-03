@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Prestador {
 
-    @Column()
+    @PrimaryColumn()
     codPrestador: number;
 
     @Column()

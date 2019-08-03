@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class TabelaPreco {
@@ -12,7 +12,7 @@ export class TabelaPreco {
     @Column()
     descItem: string;
     
-    @Column()
+    @PrimaryColumn()
     codTabela: string;
     
     @Column({

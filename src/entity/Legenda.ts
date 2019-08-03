@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, PrimaryColumn } from "typeorm";
 import { TabelaPreco } from "./tabelaPreco";
 import { Prestador } from "./Prestador";
 
@@ -13,10 +13,10 @@ export class Legenda {
     @JoinColumn({ name: "codPrestador" })
     public prestador: Prestador;
 
-    @Column()
+    @PrimaryColumn()
     codPrestador: number;
 
-    @Column()
+    @PrimaryColumn()
     codTabela: number;
 
     @Column()
