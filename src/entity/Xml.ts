@@ -10,11 +10,8 @@ export class XML {
     @JoinColumn({ name: "codPrestador" })
     public prestador: Prestador;
 
-    @Column()
-    codPrestador: number;
-
     @CreateDateColumn({type:'date'})
-    dataVigencia: Date;
+    dataImportacao: Date;
 
     @Column({type: 'xml'})
     xml: string;

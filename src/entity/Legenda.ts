@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { TabelaPreco } from "./tabelaPreco";
+import { TabelaPreco } from "./TabelaPreco";
 import { Prestador } from "./Prestador";
 
 @Entity()
