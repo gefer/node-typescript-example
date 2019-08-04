@@ -37,7 +37,7 @@ export class XMLController {
             //Carrega a tabela de preço 
             let ultTabelaPreco = await this.legendaRepository
                 .createQueryBuilder("leg")
-                .innerJoinAndSelect("leg.tabelaPreco", "TabelaPreco")
+                .innerJoinAndSelect("leg.tabelaPreco", "tab")
                 .where("leg.prestador = :prestador")
                 .orderBy("tab.dataVigencia", "DESC")
                 .take(1)
@@ -47,7 +47,7 @@ export class XMLController {
             //Pega a penúltima tabela de preço
             let PenultTabelaPreco = await this.legendaRepository
                 .createQueryBuilder("leg")
-                .innerJoinAndSelect("leg.tabelaPreco", "TabelaPreco")
+                .innerJoinAndSelect("leg.tabelaPreco", "tab")
                 .where("leg.prestador = :prestador")
                 .orderBy("tab.dataVigencia", "DESC")
                 .skip(1)
@@ -56,6 +56,26 @@ export class XMLController {
                 .getOne();
 
             //Validacoes do Xml
+
+            // Verifica data de vigência para comparar o xml com o preço da tabela
+            // A data de vigência do xml do fornecedor deve ser maior do que a data de vigência da tabela de preço
+            let dataExecucao = json["prestadorParaOperadora"]["loteGuias"]["guiaTiss"][0]["guiaSP-SADT"]["outrasDespesas"]["despesa"][0]["servicosExecutados"]["dataExecucao"];
+
+           // if (dataExecucao > ultTabelaPreco.dataVigencia) { 
+
+          //  }
+
+          //  let codigoDespesa = json["ans:prestadorParaOperadora"]["loteGuias"]["guiaTiss"][0]["guiaSP-SADT"]["outrasDespesas"]["despesa"][0]["codigodespesa"];
+
+            // Tabela.DataVigencia => 
+            // Comparar TabelaPreco.codItem = codProcedimento
+
+            //if encontrou validar o preço
+            //so gravar o codigo da regra na tabela regras
+
+            //valorUnitario
+            // let valorUnitario = json.prestadorParaOperadora.loteGuias.guiaTiss[i].guiaSP-SADT.outrasDespesas.despesa[i].servicosExecutados.valorUnitario;
+
 
             //Gera novo XML com as informações contidas
 
