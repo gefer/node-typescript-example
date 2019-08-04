@@ -1,7 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, PrimaryColumn, OneToMany } from "typeorm";
+import { Legenda } from "./Legenda";
 
 @Entity()
 export class TabelaPreco {
+
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column()
     tipoProcesso: string;
@@ -11,10 +15,10 @@ export class TabelaPreco {
 
     @Column()
     descItem: string;
-    
-    @PrimaryColumn()
+
+    @Column()
     codTabela: string;
-    
+
     @Column({
         name: "valorTotal",
         type: "decimal",
@@ -23,19 +27,23 @@ export class TabelaPreco {
     })
     valorTotal: number;
 
-    @CreateDateColumn({type:'date'})
+    @CreateDateColumn({ type: 'date' })
     dataVigencia: Date;
-    
-    @Column()
+
+    @Column({
+        nullable: true
+    })
     unidMedida: string;
 
     @Column({
         name: "valorFilme",
         type: "decimal",
         precision: 18,
-        scale: 4
+        scale: 4,
+        nullable: true
     })
     valorFilme: number;
-    static codTabela: any;
-    
+
+    @OneToMany(type => Legenda, legenda => legenda.tabelaPreco)
+    legendas: Legenda[];
 }

@@ -6,15 +6,11 @@ export class XML {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(type => Prestador, Prestador => Prestador.codPrestador)
-    @JoinColumn({ name: "codPrestador" })
+    @ManyToOne(type => Prestador, prestador => prestador.xmls)
     public prestador: Prestador;
 
-    @Column()
-    codPrestador: number;
-
     @CreateDateColumn({type:'date'})
-    dataVigencia: Date;
+    dataImportacao: Date;
 
     @Column({type: 'xml'})
     xml: string;
