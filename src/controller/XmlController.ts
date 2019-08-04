@@ -2,10 +2,10 @@ import {DespesasXML} from "../entity/DespesasXML";
 
 const parser = require('xml2json');
 
-import {Get, JsonController, Post, UploadedFile} from "routing-controllers";
-import {getRepository} from "typeorm";
-import {Legenda} from "../entity/Legenda";
-import {XML} from "../entity/Xml";
+import {Header, JsonController, Post, UploadedFile} from "routing-controllers";
+import { getRepository } from "typeorm";
+import { Legenda } from "../entity/Legenda";
+import { XML } from "../entity/Xml";
 import {RegraValidacao} from "../entity/RegraValidacao";
 
 @JsonController()
@@ -15,6 +15,8 @@ export class XMLController {
     xmlRepository = getRepository(XML);
     despesasXml = getRepository(DespesasXML);
 
+    @Header("Access-Control-Allow-Origin", "*")
+    @Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     @Post("/xml")
     async saveFile(@UploadedFile("fileName") file: any) {
         console.log("file");

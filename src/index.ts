@@ -1,31 +1,27 @@
 import "reflect-metadata";
-import {createConnection} from "typeorm";
 
-import {createExpressServer} from "routing-controllers";
+import { createConnection } from "typeorm";
+import {createExpressServer, Header} from "routing-controllers";
 import {XMLController} from "./controller/XmlController";
 import {TabelaPrecoController} from "./controller/TabelaPrecoController";
-import * as app from "express";
 
-import * as cors from "cors";
+const Koa = require('koa');
+const cors = require('@koa/cors');
 
 //Estabelece a conexão com o banco de dados
 createConnection().then(async connection => {
 
-
-    //options for cors midddleware
-    const options: cors.CorsOptions = {
-        allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
-        credentials: true,
-        methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-        preflightContinue: false
-    };
+    const app = new Koa();
+    app.use(cors());
 
     const server = createExpressServer({
         controllers: [
             XMLController,
             TabelaPrecoController
-        ]
+        ],
+        cors: app
     });
+
 
     server.listen(3001);
 
