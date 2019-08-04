@@ -3,13 +3,15 @@ import { createConnection } from "typeorm";
 
 import { createExpressServer } from "routing-controllers";
 import { XMLController } from "./controller/XmlController";
+import { TabelaPrecoController } from "./controller/TabelaPrecoController";
 
 //Estabelece a conexão com o banco de dados
 createConnection().then(async connection => {
 
     const server = createExpressServer({
         controllers: [
-            XMLController
+            XMLController,
+            TabelaPrecoController
         ]
     });
 

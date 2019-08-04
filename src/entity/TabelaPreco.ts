@@ -30,14 +30,17 @@ export class TabelaPreco {
     @CreateDateColumn({ type: 'date' })
     dataVigencia: Date;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     unidMedida: string;
 
     @Column({
         name: "valorFilme",
         type: "decimal",
         precision: 18,
-        scale: 4
+        scale: 4,
+        nullable: true
     })
     valorFilme: number;
 
