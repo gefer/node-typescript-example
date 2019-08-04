@@ -17,4 +17,6 @@ createConnection().then(async connection => {
 
     server.listen(3001);
 
+    console.log("API Conectada na porta 3001");
+
 }).catch(error => { console.log(error) });

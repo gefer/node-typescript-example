@@ -1,4 +1,4 @@
-var parser = require('xml2json');
+const parser = require('xml2json');
 
 import { JsonController, Post, UploadedFile } from "routing-controllers";
 import { getRepository } from "typeorm";
@@ -13,11 +13,13 @@ export class XMLController {
 
     @Post("/xml")
     async saveFile(@UploadedFile("fileName") file: any) {
+        console.log("file");
 
         try {
 
             // Importar xml de entrada e converte para json
-            var json = await parser.toJson(file);
+            let json = await parser.toJson(Buffer.from(file.buffer));
+            json = JSON.parse(json);
 
             //Insert json to XML TABLE
             const xml: XML = new XML();
@@ -61,5 +63,16 @@ export class XMLController {
 
             return "Houve um erro ao processar o XML: " + ex
         }
+    }
+
+    bufferFromBufferString(bufferStr) {
+        return Buffer.from(
+            bufferStr
+                .replace(/[<>]/g, '') // remove < > symbols from str
+                .split(' ') // create an array splitting it by space
+                .slice(1) // remove Buffer word from an array
+                .reduce((acc, val) =>
+                    acc.concat(parseInt(val, 16)), [])  // convert all strings of numbers to hex numbers
+        )
     }
 }
