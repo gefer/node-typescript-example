@@ -43,7 +43,6 @@ export class XMLController {
             await this.xmlRepository.save(xml);
 
             //Carrega as tabelas de preços
-
             let tabelasPreco = await this.legendaRepository
                 .createQueryBuilder("leg")
                 .innerJoinAndSelect("leg.tabelaPreco", "tab")
@@ -74,7 +73,6 @@ export class XMLController {
                 despesa.dataExecucao = dataExecucao;
                 despesa.codProcedimento = element["ans:outrasDespesas"]["ans:despesa"]["ans:servicosExecutados"]["codigoProcedimento"];
                 despesa.valorTotal = element["ans:outrasDespesas"]["ans:despesa"]["ans:servicosExecutados"]["valorTotal"];
-
 
                 //Cria o objeto Regra
                 let regra : RegraValidacao = new RegraValidacao();
@@ -127,14 +125,5 @@ export class XMLController {
                     acc.concat(parseInt(val, 16)), [])  // convert all strings of numbers to hex numbers
         )
     }
-
-    @Get("/xml/test")
-    getXml() {
-        var array = [{id: 1, nome: "Teste", tabelaPreco: [{codigo: 1, tipo: "", qtdItens: 3, dateVigenciaAtual: "20/05/2019"}]}];
-
-
-    }
-
-
 
 }
