@@ -1,6 +1,6 @@
 const parser = require('xml2json');
 
-import { JsonController, Post, UploadedFile } from "routing-controllers";
+import {Header, JsonController, Post, UploadedFile} from "routing-controllers";
 import { getRepository } from "typeorm";
 import { Legenda } from "../entity/Legenda";
 import { XML } from "../entity/Xml";
@@ -11,6 +11,8 @@ export class XMLController {
     legendaRepository = getRepository(Legenda);
     xmlRepository = getRepository(XML);
 
+    @Header("Access-Control-Allow-Origin", "*")
+    @Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     @Post("/xml")
     async saveFile(@UploadedFile("fileName") file: any) {
         console.log("file");
