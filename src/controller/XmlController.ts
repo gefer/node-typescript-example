@@ -17,19 +17,23 @@ export class XMLController {
 
         try {
 
+            // Converte o Buffer para uma String/XML
+            let xmlOrigin = Buffer.from(file.buffer).toString();
+
             // Importar xml de entrada e converte para json
-            let json = await parser.toJson(Buffer.from(file.buffer));
+            let json = await parser.toJson(xmlOrigin);
             json = JSON.parse(json);
 
             //Insert json to XML TABLE
             const xml: XML = new XML();
 
             //load Cod Prestador
-            let codPrestador = json.cabecalho.origem.identificacaoPrestador.codigoPrestadorNaOperadora;
+            let codPrestador = json["ans:mensagemTISS"]["ans:cabecalho"]["ans:origem"]["ans:identificacaoPrestador"]["ans:codigoPrestadorNaOperadora"];
 
             //Create object file
             xml.dataImportacao = new Date();
             xml.prestador = codPrestador;
+            xml.xml = xmlOrigin;
 
             //Save on database
             await this.xmlRepository.save(xml);
@@ -37,7 +41,7 @@ export class XMLController {
             //Carrega a tabela de preço 
             let ultTabelaPreco = await this.legendaRepository
                 .createQueryBuilder("leg")
-                .innerJoinAndSelect("leg.tabelaPreco", "TabelaPreco")
+                .innerJoinAndSelect("leg.tabelaPreco", "tab")
                 .where("leg.prestador = :prestador")
                 .orderBy("tab.dataVigencia", "DESC")
                 .take(1)
@@ -47,7 +51,7 @@ export class XMLController {
             //Pega a penúltima tabela de preço
             let PenultTabelaPreco = await this.legendaRepository
                 .createQueryBuilder("leg")
-                .innerJoinAndSelect("leg.tabelaPreco", "TabelaPreco")
+                .innerJoinAndSelect("leg.tabelaPreco", "tab")
                 .where("leg.prestador = :prestador")
                 .orderBy("tab.dataVigencia", "DESC")
                 .skip(1)
@@ -60,7 +64,7 @@ export class XMLController {
             //Gera novo XML com as informações contidas
 
         } catch (ex) {
-
+            console.log(ex.message);
             return "Houve um erro ao processar o XML: " + ex
         }
     }

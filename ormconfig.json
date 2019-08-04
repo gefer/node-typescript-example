@@ -4,7 +4,7 @@
    "port": 5432,
    "username": "postgres",
    "password": "12345",
-   "database": "unimed",
+   "database": "postgres",
    "synchronize": true,
    "logging": true,
    "entities": [
